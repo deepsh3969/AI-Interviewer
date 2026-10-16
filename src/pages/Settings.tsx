@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Badge, Button, Card, Field, Input, Modal, PageHeader, Select } from '../components/ui';
-import { fetchStatus, type ApiStatus } from '../lib/apiClient';
-import { DEFAULT_PREFERENCES, type Preferences } from '../lib/types';
-import { useStore } from '../state/store';
-import { useToast } from '../state/toast';
+import { Badge, Button, Card, Field, Input, Modal, PageHeader, Select } from '../components/ui.js';
+import { fetchStatus, type ApiStatus } from '../lib/apiClient.js';
+import { DEFAULT_PREFERENCES, type Preferences } from '../lib/types.js';
+import { useStore } from '../state/store.js';
+import { useToast } from '../state/toast.js';
 
 const SPEECH_LANGS = ['en-US', 'en-GB', 'en-IN', 'es-ES', 'fr-FR', 'de-DE', 'hi-IN'];
 

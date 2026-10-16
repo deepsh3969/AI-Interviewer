@@ -1,5 +1,5 @@
 import type { z } from 'zod';
-import { aiConfig } from './env';
+import { aiConfig } from './env.js';
 
 export type ProviderFailure =
   | 'not_configured'

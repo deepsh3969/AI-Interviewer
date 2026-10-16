@@ -1,6 +1,6 @@
-import type { DimensionId, Evaluation, InterviewSession, QuestionCategory } from './types';
-import { dimensionLabel, gradeForScore } from './validation';
-import { activeElapsedMs } from './timer';
+import type { DimensionId, Evaluation, InterviewSession, QuestionCategory } from './types.js';
+import { dimensionLabel, gradeForScore } from './validation.js';
+import { activeElapsedMs } from './timer.js';
 
 export interface QuestionResult {
   index: number;

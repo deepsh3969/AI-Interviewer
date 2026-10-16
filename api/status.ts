@@ -1,5 +1,5 @@
-import { aiConfig, speechConfig } from '../server/env';
-import { json, methodNotAllowed, type ApiHandler } from '../server/http';
+import { aiConfig, speechConfig } from '../server/env.js';
+import { json, methodNotAllowed, type ApiHandler } from '../server/http.js';
 
 const VERSION = '1.0.0';
 

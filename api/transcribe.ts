@@ -7,8 +7,8 @@ import {
   methodNotAllowed,
   readJsonBody,
   type ApiHandler,
-} from '../server/http';
-import { speechConfig } from '../server/env';
+} from '../server/http.js';
+import { speechConfig } from '../server/env.js';
 
 /**
  * Optional remote speech-to-text.

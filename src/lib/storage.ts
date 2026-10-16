@@ -6,8 +6,8 @@ import type {
   Preferences,
   Profile,
   SavedQuestion,
-} from './types';
-import { DEFAULT_PREFERENCES } from './types';
+} from './types.js';
+import { DEFAULT_PREFERENCES } from './types.js';
 
 /**
  * Local-first persistence.

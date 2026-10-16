@@ -1,21 +1,21 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { StoreProvider } from './state/store';
-import { ToastProvider } from './state/toast';
-import AppShell from './components/AppShell';
-import Landing from './pages/Landing';
-import SignIn from './pages/SignIn';
-import Dashboard from './pages/Dashboard';
-import InterviewSetup from './pages/InterviewSetup';
-import InterviewRoom from './pages/InterviewRoom';
-import AnswerReview from './pages/AnswerReview';
-import Report from './pages/Report';
-import History from './pages/History';
-import Analytics from './pages/Analytics';
-import Library from './pages/Library';
-import Practice from './pages/Practice';
-import Profile from './pages/Profile';
-import Settings from './pages/Settings';
-import NotFound from './pages/NotFound';
+import { StoreProvider } from './state/store.js';
+import { ToastProvider } from './state/toast.js';
+import AppShell from './components/AppShell.js';
+import Landing from './pages/Landing.js';
+import SignIn from './pages/SignIn.js';
+import Dashboard from './pages/Dashboard.js';
+import InterviewSetup from './pages/InterviewSetup.js';
+import InterviewRoom from './pages/InterviewRoom.js';
+import AnswerReview from './pages/AnswerReview.js';
+import Report from './pages/Report.js';
+import History from './pages/History.js';
+import Analytics from './pages/Analytics.js';
+import Library from './pages/Library.js';
+import Practice from './pages/Practice.js';
+import Profile from './pages/Profile.js';
+import Settings from './pages/Settings.js';
+import NotFound from './pages/NotFound.js';
 
 function AppRoutes() {
   const location = useLocation();

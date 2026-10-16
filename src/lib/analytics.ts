@@ -1,6 +1,6 @@
-import type { DimensionId, InterviewSession, ScoreTrendPoint } from './types';
-import { dimensionLabel, gradeForScore } from './validation';
-import { activeElapsedMs } from './timer';
+import type { DimensionId, InterviewSession, ScoreTrendPoint } from './types.js';
+import { dimensionLabel, gradeForScore } from './validation.js';
+import { activeElapsedMs } from './timer.js';
 
 export interface TrendPoint extends ScoreTrendPoint {
   sessionId: string;

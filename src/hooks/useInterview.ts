@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { transition, recoverSession, type SessionEvent } from '../lib/session';
-import { activeElapsedMs, answerDurationSeconds, isExpired, remainingMs } from '../lib/timer';
-import { clearDraft, getDraft, saveDraft, upsertSession } from '../lib/storage';
-import { evaluateAnswer } from '../lib/apiClient';
-import { hashString } from '../lib/id';
-import type { Evaluation, InterviewQuestion, InterviewSession } from '../lib/types';
-import { useStore } from '../state/store';
-import { useToast } from '../state/toast';
+import { transition, recoverSession, type SessionEvent } from '../lib/session.js';
+import { activeElapsedMs, answerDurationSeconds, isExpired, remainingMs } from '../lib/timer.js';
+import { clearDraft, getDraft, saveDraft, upsertSession } from '../lib/storage.js';
+import { evaluateAnswer } from '../lib/apiClient.js';
+import { hashString } from '../lib/id.js';
+import type { Evaluation, InterviewQuestion, InterviewSession } from '../lib/types.js';
+import { useStore } from '../state/store.js';
+import { useToast } from '../state/toast.js';
 
 export interface UseInterviewResult {
   session: InterviewSession | null;

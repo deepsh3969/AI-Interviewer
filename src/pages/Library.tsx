@@ -1,17 +1,17 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Badge, Button, Card, EmptyState, Field, Input, PageHeader, Select } from '../components/ui';
+import { Badge, Button, Card, EmptyState, Field, Input, PageHeader, Select } from '../components/ui.js';
 import {
   QUESTION_BANK,
   bucketLabel,
   type BucketKey,
   type BankEntry,
-} from '../lib/questionBank';
-import type { Difficulty, InterviewQuestion, SavedQuestion } from '../lib/types';
-import { randomId, hashString } from '../lib/id';
-import { buildCriteria } from '../lib/rubrics';
-import { useStore } from '../state/store';
-import { useToast } from '../state/toast';
+} from '../lib/questionBank.js';
+import type { Difficulty, InterviewQuestion, SavedQuestion } from '../lib/types.js';
+import { randomId, hashString } from '../lib/id.js';
+import { buildCriteria } from '../lib/rubrics.js';
+import { useStore } from '../state/store.js';
+import { useToast } from '../state/toast.js';
 
 const DIFFICULTIES: Difficulty[] = ['easy', 'medium', 'hard'];
 const CATEGORIES = [

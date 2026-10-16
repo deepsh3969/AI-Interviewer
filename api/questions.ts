@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { chatJson } from '../server/ai';
-import { respondProviderFailure } from '../server/failures';
+import { chatJson } from '../server/ai.js';
+import { respondProviderFailure } from '../server/failures.js';
 import {
   RateLimiter,
   clientIp,
@@ -9,13 +9,13 @@ import {
   methodNotAllowed,
   readJsonBody,
   type ApiHandler,
-} from '../server/http';
-import { aiConfig } from '../server/env';
-import { aiQuestionSetSchema, questionGenerationMessages } from '../server/prompts';
-import { validateConfig, interviewQuestionSchema } from '../src/lib/validation';
-import { buildCriteria } from '../src/lib/rubrics';
-import { hashString } from '../src/lib/id';
-import type { Difficulty, InterviewQuestion } from '../src/lib/types';
+} from '../server/http.js';
+import { aiConfig } from '../server/env.js';
+import { aiQuestionSetSchema, questionGenerationMessages } from '../server/prompts.js';
+import { validateConfig, interviewQuestionSchema } from '../src/lib/validation.js';
+import { buildCriteria } from '../src/lib/rubrics.js';
+import { hashString } from '../src/lib/id.js';
+import type { Difficulty, InterviewQuestion } from '../src/lib/types.js';
 
 const limiter = new RateLimiter(60_000, 12);
 

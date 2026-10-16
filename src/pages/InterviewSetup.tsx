@@ -1,12 +1,12 @@
 import { useMemo, useState, type FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Badge, Button, Card, Field, Input, PageHeader, Select, Textarea } from '../components/ui';
-import { validateConfig } from '../lib/validation';
-import { createSession } from '../lib/session';
-import { generateQuestionSet } from '../lib/apiClient';
-import { upsertSession } from '../lib/storage';
-import type { ExperienceLevel, InterviewConfig, InterviewType, ResponseMode } from '../lib/types';
-import { useToast } from '../state/toast';
+import { Badge, Button, Card, Field, Input, PageHeader, Select, Textarea } from '../components/ui.js';
+import { validateConfig } from '../lib/validation.js';
+import { createSession } from '../lib/session.js';
+import { generateQuestionSet } from '../lib/apiClient.js';
+import { upsertSession } from '../lib/storage.js';
+import type { ExperienceLevel, InterviewConfig, InterviewType, ResponseMode } from '../lib/types.js';
+import { useToast } from '../state/toast.js';
 
 const ROLES = [
   'Software Engineer',

@@ -1,5 +1,5 @@
-import type { DimensionId, EvaluationCriterion, InterviewQuestion, QuestionCategory } from './types';
-import { dimensionLabel } from './validation';
+import type { DimensionId, EvaluationCriterion, InterviewQuestion, QuestionCategory } from './types.js';
+import { dimensionLabel } from './validation.js';
 
 interface DimSpec {
   id: DimensionId;

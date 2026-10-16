@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet, Link, useNavigate } from 'react-router-dom';
-import { fetchStatus, type ApiStatus } from '../lib/apiClient';
-import { useStore } from '../state/store';
+import { fetchStatus, type ApiStatus } from '../lib/apiClient.js';
+import { useStore } from '../state/store.js';
 
 const NAV = [
   { to: '/dashboard', label: 'Dashboard' },

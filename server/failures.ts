@@ -1,5 +1,5 @@
-import { ProviderError } from './ai';
-import { fail, type ApiResponse } from './http';
+import { ProviderError } from './ai.js';
+import { fail, type ApiResponse } from './http.js';
 
 const FAILURE_MAP: Record<string, { status: number; code: string; message: string; headers?: Record<string, string> }> = {
   not_configured: {

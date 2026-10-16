@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import type { InterviewConfig, InterviewQuestion, DimensionId } from '../src/lib/types';
-import { rubricForQuestion } from '../src/lib/rubrics';
+import type { InterviewConfig, InterviewQuestion, DimensionId } from '../src/lib/types.js';
+import { rubricForQuestion } from '../src/lib/rubrics.js';
 
 export const QUESTION_CATEGORIES = [
   'introduction',

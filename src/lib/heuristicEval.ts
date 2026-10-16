@@ -1,6 +1,6 @@
-import type { DimensionId, Evaluation, InterviewQuestion } from './types';
-import { dimensionLabel, toEvaluation } from './validation';
-import { rubricForQuestion, weightedOverall } from './rubrics';
+import type { DimensionId, Evaluation, InterviewQuestion } from './types.js';
+import { dimensionLabel, toEvaluation } from './validation.js';
+import { rubricForQuestion, weightedOverall } from './rubrics.js';
 
 /**
  * Non-AI fallback evaluation.

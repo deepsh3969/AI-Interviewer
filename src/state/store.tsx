@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
-import { loadDatabase, updateDatabase, type Database, type SaveResult } from '../lib/storage';
+import { loadDatabase, updateDatabase, type Database, type SaveResult } from '../lib/storage.js';
 
 interface StoreValue {
   db: Database;

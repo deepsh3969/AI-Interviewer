@@ -1,4 +1,4 @@
-import type { InterviewSession } from './types';
+import type { InterviewSession } from './types.js';
 
 /** Elapsed active session time in ms, excluding paused periods. */
 export function activeElapsedMs(session: InterviewSession, now: number = Date.now()): number {

@@ -1,14 +1,14 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Badge, Button, Card, EmptyState, PageHeader, Spinner, Textarea } from '../components/ui';
-import { EvaluationBlock } from './InterviewRoom';
-import { evaluateAnswer } from '../lib/apiClient';
-import { QUESTION_BANK, bucketLabel, type BucketKey } from '../lib/questionBank';
-import { hashString } from '../lib/id';
-import { buildCriteria } from '../lib/rubrics';
-import type { Evaluation, InterviewQuestion, PracticeRecord } from '../lib/types';
-import { useStore } from '../state/store';
-import { useToast } from '../state/toast';
+import { Badge, Button, Card, EmptyState, PageHeader, Spinner, Textarea } from '../components/ui.js';
+import { EvaluationBlock } from './InterviewRoom.js';
+import { evaluateAnswer } from '../lib/apiClient.js';
+import { QUESTION_BANK, bucketLabel, type BucketKey } from '../lib/questionBank.js';
+import { hashString } from '../lib/id.js';
+import { buildCriteria } from '../lib/rubrics.js';
+import type { Evaluation, InterviewQuestion, PracticeRecord } from '../lib/types.js';
+import { useStore } from '../state/store.js';
+import { useToast } from '../state/toast.js';
 
 function findBankQuestion(id: string): { question: InterviewQuestion; bucket: BucketKey } | null {
   for (const key of Object.keys(QUESTION_BANK) as BucketKey[]) {

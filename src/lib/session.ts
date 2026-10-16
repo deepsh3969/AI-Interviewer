@@ -1,5 +1,5 @@
-import type { AnswerRecord, InterviewQuestion, InterviewSession, SessionState } from './types';
-import { randomId } from './id';
+import type { AnswerRecord, InterviewQuestion, InterviewSession, SessionState } from './types.js';
+import { randomId } from './id.js';
 
 /**
  * Interview session state machine.

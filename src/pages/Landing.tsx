@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchStatus, type ApiStatus } from '../lib/apiClient';
+import { fetchStatus, type ApiStatus } from '../lib/apiClient.js';
 
 const FEATURES = [
   {

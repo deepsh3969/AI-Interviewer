@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Badge, Button, Card, EmptyState, Modal, PageHeader, Select } from '../components/ui';
-import { summarizeHistory } from '../lib/analytics';
-import { formatDuration } from '../lib/timer';
-import { deleteSession } from '../lib/storage';
-import { useStore } from '../state/store';
-import { useToast } from '../state/toast';
+import { Badge, Button, Card, EmptyState, Modal, PageHeader, Select } from '../components/ui.js';
+import { summarizeHistory } from '../lib/analytics.js';
+import { formatDuration } from '../lib/timer.js';
+import { deleteSession } from '../lib/storage.js';
+import { useStore } from '../state/store.js';
+import { useToast } from '../state/toast.js';
 
 type Filter = 'all' | 'completed' | 'in-progress' | 'abandoned';
 

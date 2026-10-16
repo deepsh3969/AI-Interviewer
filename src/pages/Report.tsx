@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Badge, Button, Card, EmptyState, PageHeader } from '../components/ui';
-import { DimensionBarChart } from '../components/charts';
-import { EvaluationBlock } from './InterviewRoom';
-import { buildReport } from '../lib/report';
-import { formatDuration } from '../lib/timer';
-import { useStore } from '../state/store';
+import { Badge, Button, Card, EmptyState, PageHeader } from '../components/ui.js';
+import { DimensionBarChart } from '../components/charts.js';
+import { EvaluationBlock } from './InterviewRoom.js';
+import { buildReport } from '../lib/report.js';
+import { formatDuration } from '../lib/timer.js';
+import { useStore } from '../state/store.js';
 
 export default function Report() {
   const { id } = useParams<{ id: string }>();

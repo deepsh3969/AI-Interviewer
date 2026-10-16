@@ -1,8 +1,8 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Card, Field, Input } from '../components/ui';
-import { useStore } from '../state/store';
-import { useToast } from '../state/toast';
+import { Button, Card, Field, Input } from '../components/ui.js';
+import { useStore } from '../state/store.js';
+import { useToast } from '../state/toast.js';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

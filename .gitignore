@@ -26,3 +26,6 @@ Thumbs.db
 # Temporary
 tmp/
 *.tmp
+
+.vercel
+.env*

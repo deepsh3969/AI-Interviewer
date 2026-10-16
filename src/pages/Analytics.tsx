@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Badge, Card, EmptyState, PageHeader, Stat } from '../components/ui';
-import { DimensionBarChart, ScoreTrendChart } from '../components/charts';
-import { summarizeHistory } from '../lib/analytics';
-import { formatDuration } from '../lib/timer';
-import { useStore } from '../state/store';
+import { Badge, Card, EmptyState, PageHeader, Stat } from '../components/ui.js';
+import { DimensionBarChart, ScoreTrendChart } from '../components/charts.js';
+import { summarizeHistory } from '../lib/analytics.js';
+import { formatDuration } from '../lib/timer.js';
+import { useStore } from '../state/store.js';
 
 export default function Analytics() {
   const { db } = useStore();

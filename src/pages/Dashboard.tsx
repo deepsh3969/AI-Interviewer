@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Badge, Button, Card, EmptyState, Field, Input, PageHeader, Stat } from '../components/ui';
-import { ScoreTrendChart } from '../components/charts';
-import { summarizeHistory } from '../lib/analytics';
-import { formatDuration } from '../lib/timer';
-import { useStore } from '../state/store';
-import { useToast } from '../state/toast';
+import { Badge, Button, Card, EmptyState, Field, Input, PageHeader, Stat } from '../components/ui.js';
+import { ScoreTrendChart } from '../components/charts.js';
+import { summarizeHistory } from '../lib/analytics.js';
+import { formatDuration } from '../lib/timer.js';
+import { useStore } from '../state/store.js';
+import { useToast } from '../state/toast.js';
 
 export default function Dashboard() {
   const { db, update } = useStore();

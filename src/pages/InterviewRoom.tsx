@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Badge, Button, Card, Modal, PageHeader, Progress, Spinner } from '../components/ui';
-import { useInterview, type UseInterviewResult } from '../hooks/useInterview';
-import { useSpeechRecognition } from '../hooks/useSpeechRecognition';
-import { useSpeechSynthesis } from '../hooks/useSpeechSynthesis';
-import { useAudioRecorder } from '../hooks/useAudioRecorder';
-import { fetchStatus, transcribeAudio } from '../lib/apiClient';
-import { formatClock } from '../lib/timer';
-import { useStore } from '../state/store';
-import { useToast } from '../state/toast';
-import type { Evaluation } from '../lib/types';
+import { Badge, Button, Card, Modal, PageHeader, Progress, Spinner } from '../components/ui.js';
+import { useInterview, type UseInterviewResult } from '../hooks/useInterview.js';
+import { useSpeechRecognition } from '../hooks/useSpeechRecognition.js';
+import { useSpeechSynthesis } from '../hooks/useSpeechSynthesis.js';
+import { useAudioRecorder } from '../hooks/useAudioRecorder.js';
+import { fetchStatus, transcribeAudio } from '../lib/apiClient.js';
+import { formatClock } from '../lib/timer.js';
+import { useStore } from '../state/store.js';
+import { useToast } from '../state/toast.js';
+import type { Evaluation } from '../lib/types.js';
 
 export default function InterviewRoom() {
   const { id } = useParams<{ id: string }>();

@@ -1,13 +1,13 @@
 import { z } from 'zod';
-import type { Evaluation, InterviewConfig, InterviewQuestion } from './types';
+import type { Evaluation, InterviewConfig, InterviewQuestion } from './types.js';
 import {
   evaluationObjectSchema,
   interviewQuestionSchema,
   questionSetResponseSchema,
   validateConfig,
-} from './validation';
-import { buildFallbackQuestions } from './questionBank';
-import { heuristicEvaluate } from './heuristicEval';
+} from './validation.js';
+import { buildFallbackQuestions } from './questionBank.js';
+import { heuristicEvaluate } from './heuristicEval.js';
 
 export type ApiErrorCode =
   | 'network'

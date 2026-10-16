@@ -8,11 +8,11 @@
  *   npm run dev            # Vite dev server proxies /api here
  */
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
-import statusHandler from '../api/status';
-import questionsHandler from '../api/questions';
-import evaluateHandler from '../api/evaluate';
-import transcribeHandler from '../api/transcribe';
-import type { ApiHandler, ApiRequest } from './http';
+import statusHandler from '../api/status.js';
+import questionsHandler from '../api/questions.js';
+import evaluateHandler from '../api/evaluate.js';
+import transcribeHandler from '../api/transcribe.js';
+import type { ApiHandler, ApiRequest } from './http.js';
 
 const PORT = Number(process.env.API_PORT ?? 8787);
 const MAX_BODY = 4 * 1024 * 1024;

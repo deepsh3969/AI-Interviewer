@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Badge, Card, EmptyState, PageHeader } from '../components/ui';
-import { EvaluationBlock } from './InterviewRoom';
-import { formatDuration } from '../lib/timer';
-import { useStore } from '../state/store';
+import { Badge, Card, EmptyState, PageHeader } from '../components/ui.js';
+import { EvaluationBlock } from './InterviewRoom.js';
+import { formatDuration } from '../lib/timer.js';
+import { useStore } from '../state/store.js';
 
 export default function AnswerReview() {
   const { id } = useParams<{ id: string }>();

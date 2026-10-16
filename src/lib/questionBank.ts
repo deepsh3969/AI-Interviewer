@@ -4,9 +4,9 @@ import type {
   InterviewQuestion,
   InterviewType,
   QuestionCategory,
-} from './types';
-import { hashString, seededRandom } from './id';
-import { buildCriteria } from './rubrics';
+} from './types.js';
+import { hashString, seededRandom } from './id.js';
+import { buildCriteria } from './rubrics.js';
 
 /**
  * Deterministic starter question bank.
