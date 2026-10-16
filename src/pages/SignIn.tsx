@@ -38,7 +38,7 @@ export default function SignIn({ mode }: { mode: 'signin' | 'register' }) {
       targetRole: existing?.targetRole,
     };
 
-    const result = update((database) => ({ ...database, profile }));
+    const result = update((database) => ({ ...database, profile, signedIn: true }));
     if (!result.ok) {
       push(result.error, 'error');
       return;
@@ -49,11 +49,11 @@ export default function SignIn({ mode }: { mode: 'signin' | 'register' }) {
 
   return (
     <div className="min-h-screen">
-      <header className="border-b border-line bg-navy-900/70">
+      <header className="border-b border-line bg-panel">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
           <Link to="/" className="flex items-center gap-2">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-sm font-bold text-white">AI</span>
-            <span className="text-sm font-semibold">AI Interviewer Pro</span>
+            <span className="text-sm font-semibold text-ink">AI Interviewer Pro</span>
           </Link>
           <Link to={isRegister ? '/signin' : '/register'} className="btn-ghost">
             {isRegister ? 'I already have a profile' : 'Create a profile'}
@@ -62,12 +62,19 @@ export default function SignIn({ mode }: { mode: 'signin' | 'register' }) {
       </header>
 
       <main className="mx-auto max-w-md px-4 py-12">
-        <h1 className="text-2xl font-semibold">{isRegister ? 'Create your profile' : 'Sign in'}</h1>
+        <h1 className="text-2xl font-semibold text-ink">{isRegister ? 'Create your profile' : 'Sign in'}</h1>
         <p className="mt-2 text-sm text-ink-dim">
           {isRegister
             ? 'Set up a local practice profile for this browser.'
             : 'Switch to the local profile registered on this device.'}
         </p>
+
+        {db.signedIn === false ? (
+          <div className="mt-4 rounded-lg border border-accent/40 bg-accent-soft p-3 text-xs leading-relaxed text-accent-2">
+            You have been signed out. Sign in again to get back to your interviews - nothing was deleted from this
+            device.
+          </div>
+        ) : null}
 
         <Card className="mt-6 p-6">
           <form onSubmit={handleSubmit} noValidate className="space-y-4">

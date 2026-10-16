@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Badge, Button, Card, EmptyState, Field, Input, PageHeader, Select } from '../components/ui.js';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Badge, Button, Card, EmptyState, Field, Input, PageHeader, Select, Tabs } from '../components/ui.js';
 import {
   QUESTION_BANK,
   bucketLabel,
@@ -69,11 +69,17 @@ export default function Library() {
   const { db, update } = useStore();
   const { push } = useToast();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const view: 'all' | 'saved' = searchParams.get('view') === 'saved' ? 'saved' : 'all';
 
   const [query, setQuery] = useState('');
   const [bucket, setBucket] = useState<'all' | BucketKey>('all');
   const [difficulty, setDifficulty] = useState<'all' | Difficulty>('all');
   const [category, setCategory] = useState<'all' | string>('all');
+
+  function setView(next: 'all' | 'saved') {
+    setSearchParams(next === 'saved' ? { view: 'saved' } : {});
+  }
 
   const savedIds = useMemo(() => new Set(db.savedQuestions.map((s) => s.question.id)), [db.savedQuestions]);
 
@@ -108,6 +114,32 @@ export default function Library() {
     push('Saved to your library.', 'success');
   }
 
+  const savedSection = (
+    <section className={view === 'saved' ? '' : 'mt-8'}>
+      <div className="grid gap-3">
+        {db.savedQuestions.map((saved) => (
+          <Card key={saved.id} className="flex flex-wrap items-center justify-between gap-3 p-4">
+            <div>
+              <p className="text-sm text-ink">{saved.question.text}</p>
+              <p className="faint mt-1">
+                practised {saved.practisedCount}× ·{' '}
+                {saved.lastScore !== undefined ? `last score ${saved.lastScore}` : 'not practised yet'}
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <Link to={`/practice/${saved.question.id}`} className="btn-secondary">
+                Practise
+              </Link>
+              <Button variant="ghost" onClick={() => toggleSave(saved.question)}>
+                Remove
+              </Button>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </section>
+  );
+
   return (
     <div>
       <PageHeader
@@ -120,7 +152,39 @@ export default function Library() {
         }
       />
 
-      <Card className="mb-4 grid gap-3 p-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mb-4">
+        <Tabs
+          tabs={[
+            { id: 'all', label: `All questions (${LIBRARY.length})` },
+            { id: 'saved', label: `Saved (${db.savedQuestions.length})` },
+          ]}
+          active={view}
+          onChange={(id) => setView(id === 'saved' ? 'saved' : 'all')}
+        />
+      </div>
+
+      {view === 'saved' ? (
+        db.savedQuestions.length === 0 ? (
+          <EmptyState
+            title="No saved questions yet"
+            description="Save questions from the library to build your own practice set - they stay on this device."
+            action={
+              <Button variant="primary" onClick={() => setView('all')}>
+                Browse all questions
+              </Button>
+            }
+          />
+        ) : (
+          <>
+            <p className="mb-3 text-xs text-ink-faint">
+              {db.savedQuestions.length} saved · {db.practice.length} practice attempts recorded
+            </p>
+            {savedSection}
+          </>
+        )
+      ) : (
+        <>
+          <Card className="mb-4 grid gap-3 p-4 sm:grid-cols-2 lg:grid-cols-4">
         <Field label="Search" htmlFor="lib-search">
           <Input
             id="lib-search"
@@ -200,7 +264,7 @@ export default function Library() {
               <p className="mt-2 text-sm font-medium text-ink">{question.text}</p>
               <ul className="mt-2 flex flex-wrap gap-2 text-xs text-ink-faint">
                 {question.answerStructure.slice(0, 3).map((step) => (
-                  <li key={step} className="rounded border border-line bg-navy-900 px-2 py-0.5">
+                  <li key={step} className="rounded border border-line bg-panel-2 px-2 py-0.5">
                     {step}
                   </li>
                 ))}
@@ -218,32 +282,9 @@ export default function Library() {
         </div>
       )}
 
-      {db.savedQuestions.length > 0 ? (
-        <section className="mt-8">
-          <h2 className="mb-3 text-lg font-semibold text-ink">Saved questions</h2>
-          <div className="grid gap-3">
-            {db.savedQuestions.map((saved) => (
-              <Card key={saved.id} className="flex flex-wrap items-center justify-between gap-3 p-4">
-                <div>
-                  <p className="text-sm text-ink">{saved.question.text}</p>
-                  <p className="faint mt-1">
-                    practised {saved.practisedCount}× ·{' '}
-                    {saved.lastScore !== undefined ? `last score ${saved.lastScore}` : 'not practised yet'}
-                  </p>
-                </div>
-                <div className="flex gap-2">
-                  <Link to={`/practice/${saved.question.id}`} className="btn-secondary">
-                    Practise
-                  </Link>
-                  <Button variant="ghost" onClick={() => toggleSave(saved.question)}>
-                    Remove
-                  </Button>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </section>
-      ) : null}
+          {db.savedQuestions.length > 0 ? savedSection : null}
+        </>
+      )}
     </div>
   );
 }

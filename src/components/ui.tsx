@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import { AlertTriangle, RotateCcw, TrendingDown, TrendingUp } from 'lucide-react';
 
 export function Button({
   variant = 'primary',
@@ -132,7 +133,7 @@ export function Progress({ value, max = 100, label }: { value: number; max?: num
         </div>
       ) : null}
       <div
-        className="h-2 w-full overflow-hidden rounded-full bg-navy-900"
+        className="h-2 w-full overflow-hidden rounded-full bg-panel-2"
         role="progressbar"
         aria-valuenow={Math.round(value)}
         aria-valuemin={0}
@@ -184,12 +185,12 @@ export function Modal({
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-40 flex items-center justify-center p-4 print:hidden">
-      <button type="button" className="absolute inset-0 bg-navy-950/80" aria-label="Close dialog" onClick={onClose} />
+      <button type="button" className="absolute inset-0 bg-overlay/45 backdrop-blur-[1px]" aria-label="Close dialog" onClick={onClose} />
       <div
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="card relative z-10 w-full max-w-lg animate-slide-up p-5"
+        className="card relative z-10 w-full max-w-lg animate-slide-up p-5 shadow-pop"
       >
         <div className="mb-3 flex items-start justify-between gap-4">
           <h2 className="text-lg font-semibold text-ink">{title}</h2>
@@ -231,6 +232,154 @@ export function Tabs({
           {tab.label}
         </button>
       ))}
+    </div>
+  );
+}
+
+/** A single shimmering placeholder block. */
+export function Skeleton({ className = '' }: { className?: string }) {
+  return <div className={`skeleton ${className}`} aria-hidden />;
+}
+
+/** Page-level skeleton used as the Suspense fallback for lazy-loaded routes. */
+export function PageSkeleton() {
+  return (
+    <div role="status" aria-label="Loading page">
+      <span className="sr-only">Loading…</span>
+      <div className="mb-6 flex items-end justify-between gap-4">
+        <div className="space-y-2">
+          <Skeleton className="h-7 w-56" />
+          <Skeleton className="h-4 w-80 max-w-full" />
+        </div>
+        <Skeleton className="h-9 w-36" />
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="card space-y-3 p-4">
+            <Skeleton className="h-3 w-24" />
+            <Skeleton className="h-7 w-16" />
+            <Skeleton className="h-3 w-32" />
+          </div>
+        ))}
+      </div>
+      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        <div className="card space-y-3 p-5 lg:col-span-2">
+          <Skeleton className="h-4 w-40" />
+          <Skeleton className="h-52 w-full" />
+        </div>
+        <div className="card space-y-3 p-5">
+          <Skeleton className="h-4 w-40" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-4 w-5/6" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Error panel with an optional retry action. */
+export function ErrorState({
+  title = 'Something went wrong',
+  description,
+  onRetry,
+}: {
+  title?: string;
+  description: string;
+  onRetry?: () => void;
+}) {
+  return (
+    <div className="card border-danger/30 p-6" role="alert">
+      <div className="flex items-start gap-3">
+        <span className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-danger/10 text-danger">
+          <AlertTriangle size={16} aria-hidden />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h2 className="text-sm font-semibold text-ink">{title}</h2>
+          <p className="mt-1 text-sm text-ink-dim">{description}</p>
+          {onRetry ? (
+            <Button variant="secondary" className="mt-3" onClick={onRetry}>
+              <RotateCcw size={14} aria-hidden />
+              Try again
+            </Button>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Square icon-only button with an accessible name and hover tooltip. */
+export function IconButton({
+  label,
+  className = '',
+  children,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement> & { label: string }) {
+  return (
+    <button
+      type="button"
+      title={label}
+      aria-label={label}
+      className={`inline-flex h-9 w-9 items-center justify-center rounded-lg text-ink-dim transition-colors hover:bg-panel-2 hover:text-ink disabled:opacity-50 ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}
+
+/**
+ * KPI card for the dashboard: label, big value, optional hint, icon chip and
+ * an optional trend chip. The trend only renders when real comparative data
+ * exists (callers pass null otherwise - never fabricate a delta).
+ */
+export function MetricCard({
+  label,
+  value,
+  hint,
+  icon,
+  delta,
+  deltaSuffix = 'pts',
+}: {
+  label: string;
+  value: ReactNode;
+  hint?: string;
+  icon?: ReactNode;
+  /** null = not enough history to compare; omitted arrows by design. */
+  delta?: number | null;
+  deltaSuffix?: string;
+}) {
+  const hasDelta = typeof delta === 'number' && Number.isFinite(delta);
+  const positive = (delta ?? 0) >= 0;
+  return (
+    <div className="card p-4 sm:p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-faint">{label}</p>
+          <p className="mt-1.5 text-2xl font-semibold tracking-tight text-ink">{value}</p>
+          {hint ? <p className="mt-1 truncate text-xs text-ink-dim">{hint}</p> : null}
+        </div>
+        {icon ? (
+          <span
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent-2"
+            aria-hidden
+          >
+            {icon}
+          </span>
+        ) : null}
+      </div>
+      {hasDelta ? (
+        <p
+          className={`mt-2.5 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+            positive ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'
+          }`}
+        >
+          {positive ? <TrendingUp size={12} aria-hidden /> : <TrendingDown size={12} aria-hidden />}
+          {positive ? '+' : ''}
+          {delta} {deltaSuffix} vs previous 30 days
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -21,6 +21,8 @@ export const STORAGE_KEY = 'ai-interviewer-pro.v1';
 export interface Database {
   version: 1;
   profile: Profile | null;
+  /** False only after an explicit sign-out; controls the app-shell guard. */
+  signedIn: boolean;
   preferences: Preferences;
   sessions: InterviewSession[];
   savedQuestions: SavedQuestion[];
@@ -37,6 +39,7 @@ export function emptyDatabase(): Database {
   return {
     version: 1,
     profile: null,
+    signedIn: true,
     preferences: { ...DEFAULT_PREFERENCES },
     sessions: [],
     savedQuestions: [],
@@ -90,6 +93,7 @@ function normalize(input: Partial<Database>): Database {
   return {
     version: 1,
     profile: input.profile && typeof input.profile === 'object' && input.profile.email ? input.profile : null,
+    signedIn: typeof input.signedIn === 'boolean' ? input.signedIn : true,
     preferences,
     sessions: Array.isArray(input.sessions) ? input.sessions.slice(-MAX_SESSIONS) : [],
     savedQuestions: Array.isArray(input.savedQuestions) ? input.savedQuestions : [],

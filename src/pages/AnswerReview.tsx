@@ -71,7 +71,7 @@ export default function AnswerReview() {
                     Your answer · {answer.text.trim().split(/\s+/).length} words ·{' '}
                     {formatDuration(answer.durationSeconds)} spent
                   </p>
-                  <p className="mt-1 whitespace-pre-wrap rounded-md bg-navy-900 p-3 text-sm text-ink-dim">
+                  <p className="mt-1 whitespace-pre-wrap rounded-md bg-panel-2 p-3 text-sm text-ink-dim">
                     {answer.text || '(no text - skipped)'}
                   </p>
 

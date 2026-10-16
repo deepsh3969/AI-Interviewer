@@ -314,7 +314,7 @@ function Room({ interview }: { interview: UseInterviewResult }) {
           ) : null}
           {synthesis.error ? <p className="mt-2 text-xs text-danger">{synthesis.error}</p> : null}
 
-          <details className="mt-5 rounded-lg border border-line bg-navy-900 p-4">
+          <details className="mt-5 rounded-lg border border-line bg-panel-2 p-4">
             <summary className="cursor-pointer text-sm font-medium text-ink-dim">
               What evaluators look for (rubric)
             </summary>
@@ -355,7 +355,7 @@ function Room({ interview }: { interview: UseInterviewResult }) {
             autoFocus={session.config.mode === 'typed'}
           />
 
-          <div className="mt-4 space-y-3 rounded-lg border border-line bg-navy-900 p-4">
+          <div className="mt-4 space-y-3 rounded-lg border border-line bg-panel-2 p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h4 className="text-sm font-medium text-ink">Voice input</h4>
               <MicStatus rec={rec} />
@@ -640,7 +640,7 @@ function Room({ interview }: { interview: UseInterviewResult }) {
 
 function Meta({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-line bg-navy-900 px-3 py-2">
+    <div className="rounded-lg border border-line bg-panel-2 px-3 py-2">
       <dt className="text-[11px] uppercase tracking-wide text-ink-faint">{label}</dt>
       <dd className="mt-0.5 text-sm text-ink">{value}</dd>
     </div>
@@ -691,7 +691,7 @@ export function EvaluationBlock({ evaluation }: { evaluation: Evaluation }) {
 
       <div className="grid gap-2 sm:grid-cols-2">
         {evaluation.dimensions.map((dim) => (
-          <div key={dim.id} className="rounded-lg border border-line bg-navy-900 p-3">
+          <div key={dim.id} className="rounded-lg border border-line bg-panel-2 p-3">
             <div className="flex items-center justify-between text-sm">
               <span className="text-ink">{dim.label}</span>
               <span className="font-mono text-ink-dim">{dim.score}</span>
@@ -751,7 +751,7 @@ export function EvaluationBlock({ evaluation }: { evaluation: Evaluation }) {
         </div>
       ) : null}
 
-      <div className="rounded-lg border border-line bg-navy-900 p-4">
+      <div className="rounded-lg border border-line bg-panel-2 p-4">
         <h4 className="text-sm font-semibold text-ink">A stronger structure</h4>
         <p className="faint mt-1">Illustrative only - not the only correct answer.</p>
         <ol className="mt-2 list-inside list-decimal space-y-1 text-sm text-ink-dim">

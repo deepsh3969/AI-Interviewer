@@ -145,7 +145,7 @@ export default function Analytics() {
             </ul>
           )}
 
-          <div className="mt-5 rounded-lg border border-line bg-navy-900 p-4">
+          <div className="mt-5 rounded-lg border border-line bg-panel-2 p-4">
             <h4 className="text-sm font-semibold text-ink">What these numbers mean</h4>
             <ul className="mt-2 space-y-1 text-xs text-ink-faint">
               <li>• Scores describe written or spoken practice answers only.</li>

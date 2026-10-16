@@ -1,29 +1,54 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-navy-950: #060a13;
-  --color-navy-900: #0a101c;
-  --color-navy-850: #0d1524;
-  --color-panel: #111a2c;
-  --color-panel-2: #16223a;
-  --color-line: #22304d;
-  --color-line-strong: #2f4066;
-  --color-ink: #e8eef9;
-  --color-ink-dim: #a9b6cc;
-  --color-ink-faint: #78859d;
-  --color-accent: #3b82f6;
-  --color-accent-2: #60a5fa;
-  --color-accent-soft: #10233f;
-  --color-success: #34d399;
-  --color-warn: #fbbf24;
-  --color-danger: #f87171;
+  /* Surfaces */
+  --color-canvas: #f7f8fc;
+  --color-panel: #ffffff;
+  --color-panel-2: #f2f4f8;
+  --color-sidebar: #111827;
+  --color-sidebar-2: #1f2937;
+
+  /* Lines */
+  --color-line: #e6e9f0;
+  --color-line-strong: #d0d5dd;
+
+  /* Text */
+  --color-ink: #172033;
+  --color-ink-dim: #667085;
+  --color-ink-faint: #98a2b3;
+
+  /* Accent & status */
+  --color-accent: #635bff;
+  --color-accent-2: #5145cd;
+  --color-accent-soft: #eeeeff;
+  --color-success: #168a62;
+  --color-warn: #d97706;
+  --color-danger: #dc4545;
+
+  /* Overlay */
+  --color-overlay: #111827;
+
+  /* Legacy dark aliases kept for any remaining references (dark inset surfaces) */
+  --color-navy-950: #f7f8fc;
+  --color-navy-900: #f2f4f8;
+  --color-navy-850: #eceff5;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -16px rgb(0 0 0 / 0.6);
-  --animate-fade: fade 0.25s ease;
-  --animate-slide-up: slide-up 0.3s ease;
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.05), 0 1px 3px rgb(16 24 40 / 0.06);
+  --shadow-pop: 0 8px 24px -8px rgb(16 24 40 / 0.16), 0 2px 6px rgb(16 24 40 / 0.06);
+  --animate-fade: fade 0.2s ease;
+  --animate-slide-up: slide-up 0.25s ease;
+
+  /* Showcase (dark marketing experience) */
+  --color-showcase: #080b14;
+  --color-showcase-2: #101525;
+  --color-showcase-ink: #f7f8fc;
+  --color-showcase-dim: #a5aec3;
+  --color-showcase-violet: #8b5cf6;
+  --color-showcase-blue: #5b8cff;
+  --color-showcase-line: rgb(255 255 255 / 0.1);
 }
 
 @keyframes fade {
@@ -38,7 +63,7 @@
 @keyframes slide-up {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -46,29 +71,50 @@
   }
 }
 
+@keyframes shimmer {
+  from {
+    background-position: -400px 0;
+  }
+  to {
+    background-position: 400px 0;
+  }
+}
+
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
-    @apply bg-navy-950 text-ink font-sans antialiased;
+    @apply bg-canvas text-ink font-sans antialiased;
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background: rgb(59 130 246 / 0.35);
+    background: rgb(99 91 255 / 0.22);
   }
 
   *:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
+    border-radius: 4px;
   }
 
   h1,
   h2,
   h3 {
     @apply tracking-tight;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -82,7 +128,7 @@
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50 border border-line-strong bg-panel-2 text-ink hover:border-accent hover:text-accent-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50 border border-line-strong bg-panel text-ink hover:border-accent hover:text-accent-2;
   }
 
   .btn-ghost {
@@ -90,11 +136,11 @@
   }
 
   .btn-danger {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50 border border-danger/40 bg-danger/10 text-danger hover:bg-danger/20;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50 border border-danger/40 bg-danger/10 text-danger hover:bg-danger/15;
   }
 
   .input {
-    @apply w-full rounded-lg border border-line bg-navy-900 px-3 py-2 text-sm text-ink placeholder:text-ink-faint transition-colors focus:border-accent focus:outline-none;
+    @apply w-full rounded-lg border border-line-strong bg-panel px-3 py-2 text-sm text-ink placeholder:text-ink-faint transition-colors focus:border-accent focus:outline-none;
   }
 
   .label {
@@ -107,6 +153,21 @@
 
   .faint {
     @apply text-xs text-ink-faint;
+  }
+
+  .skeleton {
+    @apply rounded-md bg-panel-2;
+    background-image: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.85) 50%, transparent 100%);
+    background-size: 400px 100%;
+    background-repeat: no-repeat;
+    animation: shimmer 1.4s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton {
+      animation: none;
+      background-image: none;
+    }
   }
 }
 
@@ -124,4 +185,204 @@
     border-color: #ccc !important;
     box-shadow: none !important;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Showcase: dark, scroll-driven marketing experience on `/`.
+   Applied only while the Landing page is mounted (html.showcase-page),
+   so the authenticated light app keeps its own color scheme.
+   ------------------------------------------------------------------------- */
+
+html.showcase-page {
+  color-scheme: dark;
+  background: var(--color-showcase);
+  scroll-behavior: smooth;
+}
+
+.showcase {
+  background: var(--color-showcase);
+  color: var(--color-showcase-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+.showcase ::selection {
+  background: rgb(139 92 246 / 0.35);
+}
+
+.showcase h1,
+.showcase h2,
+.showcase h3 {
+  letter-spacing: -0.03em;
+}
+
+.showcase :focus-visible {
+  outline: 2px solid var(--color-showcase-violet);
+  outline-offset: 3px;
+}
+
+@layer components {
+  /* Section rhythm: anchors clear the fixed nav */
+  .sc-section {
+    @apply relative scroll-mt-20 px-5 py-24 sm:px-8 lg:py-32;
+  }
+
+  .sc-eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-showcase-line bg-showcase-2 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-showcase-dim;
+  }
+
+  .sc-title-xl {
+    @apply text-4xl font-semibold leading-[1.04] text-showcase-ink sm:text-5xl lg:text-6xl;
+  }
+
+  .sc-title-lg {
+    @apply text-3xl font-semibold leading-tight text-showcase-ink sm:text-4xl lg:text-5xl;
+  }
+
+  .sc-copy {
+    @apply text-base leading-relaxed text-showcase-dim sm:text-lg;
+  }
+
+  .sc-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-showcase-violet to-showcase-blue px-5 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5;
+  }
+
+  .sc-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-showcase-line bg-showcase-2/60 px-5 py-3 text-sm font-semibold text-showcase-ink transition-colors duration-200 hover:border-white/25 hover:bg-showcase-2;
+  }
+
+  .sc-card {
+    @apply rounded-2xl border border-showcase-line bg-showcase-2/80;
+  }
+
+  .sc-gradient-text {
+    background: linear-gradient(92deg, var(--color-showcase-violet), var(--color-showcase-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@layer utilities {
+  /* Faint depth grid used behind analytics / CTA */
+  .sc-grid-bg {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 35%, transparent 100%);
+  }
+
+  /* Restrained luminous washes */
+  .sc-glow-violet {
+    background: radial-gradient(closest-side, rgb(139 92 246 / 0.32), transparent 72%);
+  }
+
+  .sc-glow-blue {
+    background: radial-gradient(closest-side, rgb(91 140 255 / 0.26), transparent 72%);
+  }
+}
+
+/* --- Pinned story section --------------------------------------------------
+   Default (no JS / reduced motion / small screens): scenes stack in normal
+   flow so every word stays readable. When JS + motion + desktop are active,
+   `.is-animated` is added by StorySection and scenes become a pinned stack.
+------------------------------------------------------------------------------ */
+
+.story-stage {
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .story-stage.is-animated {
+    height: 100svh;
+    min-height: 640px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .story-stage.is-animated .story-scenes {
+    position: relative;
+    flex: 1;
+    max-height: 60svh;
+  }
+
+  .story-stage.is-animated .story-scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .story-stage.is-animated .story-scene.is-first {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .story-stage:not(.is-animated) .story-rail {
+    display: none;
+  }
+}
+
+/* Gentle idle float for decorative mockups (killed under reduced motion by
+   the global rule; never combined with JS transforms on the same element). */
+@keyframes sc-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.sc-float {
+  animation: sc-float 7s ease-in-out infinite;
+}
+
+/* Story progress rail states (written by StorySection as the timeline scrubs;
+   unlayered rules override the label utilities below). */
+.story-rail li[data-state='active'] {
+  color: var(--color-showcase-ink);
+}
+
+.story-rail li[data-state='done'] {
+  color: rgb(165 174 195 / 0.85);
+}
+
+.story-rail li[data-state='idle'] {
+  color: rgb(165 174 195 / 0.55);
+}
+
+/* --- Process timeline states ------------------------------------------------
+   `data-state` is written by ProcessSection as the rail scrubs. Without JS
+   the attribute is absent and every step keeps the readable neutral styles.
+------------------------------------------------------------------------------ */
+
+.process-step .process-icon {
+  color: var(--color-showcase-dim);
+}
+
+.process-step .process-title {
+  color: rgb(247 248 252 / 0.72);
+}
+
+.process-step[data-state='active'] .process-icon {
+  border-color: var(--color-showcase-violet);
+  color: var(--color-showcase-ink);
+  box-shadow: 0 0 0 4px rgb(139 92 246 / 0.18);
+}
+
+.process-step[data-state='active'] .process-title,
+.process-step[data-state='done'] .process-title {
+  color: var(--color-showcase-ink);
+}
+
+.process-step[data-state='done'] .process-icon {
+  border-color: rgb(52 211 153 / 0.5);
+  background: rgb(52 211 153 / 0.1);
+  color: #6ee7b7;
 }

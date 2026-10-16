@@ -1,10 +1,7 @@
 import { useMemo, useState, type FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Badge, Button, Card, Field, Input, PageHeader, Select, Textarea } from '../components/ui.js';
-import { validateConfig } from '../lib/validation.js';
-import { createSession } from '../lib/session.js';
-import { generateQuestionSet } from '../lib/apiClient.js';
-import { upsertSession } from '../lib/storage.js';
+import { Button, Card, Field, Input, PageHeader, Select, Textarea } from '../components/ui.js';
+import { startInterview } from '../lib/startInterview.js';
 import type { ExperienceLevel, InterviewConfig, InterviewType, ResponseMode } from '../lib/types.js';
 import { useToast } from '../state/toast.js';
 
@@ -57,7 +54,6 @@ export default function InterviewSetup() {
 
   const [issues, setIssues] = useState<string[]>([]);
   const [generating, setGenerating] = useState(false);
-  const [preview, setPreview] = useState<{ source: 'ai' | 'fallback'; model: string | null; note: string; count: number } | null>(null);
 
   const config: InterviewConfig = useMemo(
     () => ({
@@ -81,21 +77,16 @@ export default function InterviewSetup() {
 
   async function handleGenerate(event: FormEvent) {
     event.preventDefault();
-    setPreview(null);
-    const validation = validateConfig(config);
-    if (!validation.ok) {
-      setIssues(validation.issues);
-      return;
-    }
     setIssues([]);
     setGenerating(true);
     try {
-      const result = await generateQuestionSet(validation.value);
-      setPreview({ source: result.source, model: result.model, note: result.note, count: result.questions.length });
-      const session = createSession(validation.value, result.questions, result.source === 'ai');
-      const save = upsertSession(session);
-      if (!save.ok) {
-        push(save.error, 'error');
+      const result = await startInterview(config);
+      if (!result.ok) {
+        if (result.issues?.length) {
+          setIssues(result.issues);
+          return;
+        }
+        push(result.error ?? 'Could not start the interview.', 'error');
         return;
       }
       push(
@@ -104,7 +95,7 @@ export default function InterviewSetup() {
           : result.note || 'Using the built-in fallback question bank.',
         result.source === 'ai' ? 'success' : 'warning',
       );
-      navigate(`/interview/${session.id}`);
+      navigate(`/interview/${result.sessionId}`);
     } finally {
       setGenerating(false);
     }
@@ -299,18 +290,6 @@ export default function InterviewSetup() {
                   <li key={issue}>{issue}</li>
                 ))}
               </ul>
-            </Card>
-          ) : null}
-
-          {preview ? (
-            <Card className="p-4">
-              <div className="flex items-center gap-2">
-                <Badge tone={preview.source === 'ai' ? 'success' : 'warn'}>
-                  {preview.source === 'ai' ? 'AI generated' : 'Fallback bank'}
-                </Badge>
-                <span className="faint">{preview.count} questions</span>
-              </div>
-              <p className="mt-2 text-xs text-ink-dim">{preview.note}</p>
             </Card>
           ) : null}
 

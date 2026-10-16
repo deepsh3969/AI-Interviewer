@@ -50,6 +50,7 @@ export default function Settings() {
     const result = update(() => ({
       version: 1,
       profile: null,
+      signedIn: true,
       preferences: { ...DEFAULT_PREFERENCES },
       sessions: [],
       savedQuestions: [],

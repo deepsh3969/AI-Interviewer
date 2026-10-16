@@ -14,6 +14,14 @@ Realistic mock interviews with speech input, structured AI feedback and career-p
 - **Question library** - curated starter bank (70+ questions across software, data, product, design, marketing, support and general categories), clearly labelled as curated content, never AI output.
 - **Local practice mode** - no cloud account, no passwords. Sessions, drafts, saved questions, goals and settings live in `localStorage` under `ai-interviewer-pro.v1`. Export or delete your data any time from Settings.
 
+## Interface
+
+- **Light SaaS dashboard** - fixed dark sidebar (active-route states, in-progress badge, profile footer with sign out) plus a compact top bar with breadcrumb, global search (`/` to focus, searches pages, interviews, saved and bank questions), provider status chip, Start Interview CTA and account menu.
+- **Overview** - KPI cards (completed interviews, practice time, average score with a 30-day delta only when real comparative history exists, day streak), score-trend chart, recent-interviews table, a working **Quick start** panel that starts a real session in one click, recommendations and personal goals.
+- **Route-level code splitting** - pages load through React.lazy with a shared skeleton fallback and a top-level error boundary; a `/help` page documents setup, evaluation honesty and known limitations.
+- **Sign out** - returns to the sign-in screen without deleting anything; data stays on the device.
+- Responsive from 390 px up (drawer navigation on mobile), with `prefers-reduced-motion` respected.
+
 ## Honest limitations
 
 - Feedback is practice guidance only. It is **not** a hiring score and says nothing about personality, confidence or emotion.
@@ -61,7 +69,7 @@ Deployment targets (Vercel or similar) expose the handlers in `api/` as serverle
 
 ## Stack
 
-React 19 · TypeScript · Vite 6 · Tailwind CSS 4 · React Router 7 · Recharts · Zod · Vitest · ESLint
+React 19 · TypeScript · Vite 6 · Tailwind CSS 4 · React Router 7 · Recharts · lucide-react · Zod · Vitest · ESLint
 
 ## License
 

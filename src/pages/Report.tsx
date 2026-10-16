@@ -98,7 +98,7 @@ export default function Report() {
                 <button
                   type="button"
                   onClick={() => setOpenQuestion(openQuestion === result.questionId ? null : result.questionId)}
-                  className="flex w-full items-center justify-between gap-3 rounded-lg border border-line bg-navy-900 px-3 py-2 text-left"
+                  className="flex w-full items-center justify-between gap-3 rounded-lg border border-line bg-panel-2 px-3 py-2 text-left"
                   aria-expanded={openQuestion === result.questionId}
                 >
                   <span className="line-clamp-1 text-sm text-ink-dim">
@@ -122,7 +122,7 @@ export default function Report() {
                     {result.answerText ? (
                       <>
                         <p className="faint mt-3">Your answer</p>
-                        <p className="mt-1 whitespace-pre-wrap rounded-md bg-navy-900 p-3 text-sm text-ink-dim">
+                        <p className="mt-1 whitespace-pre-wrap rounded-md bg-panel-2 p-3 text-sm text-ink-dim">
                           {result.answerText}
                         </p>
                       </>
@@ -150,7 +150,7 @@ export default function Report() {
           ) : (
             <ul className="mt-2 space-y-2 text-sm text-ink-dim">
               {report.strongest.map((r) => (
-                <li key={r.questionId} className="rounded-md border border-line bg-navy-900 p-3">
+                <li key={r.questionId} className="rounded-md border border-line bg-panel-2 p-3">
                   <span className="font-medium text-ink">#{r.index + 1} · {r.score}</span> - {r.text}
                 </li>
               ))}
@@ -163,7 +163,7 @@ export default function Report() {
           ) : (
             <ul className="mt-2 space-y-2 text-sm text-ink-dim">
               {report.needsWork.map((r) => (
-                <li key={r.questionId} className="rounded-md border border-line bg-navy-900 p-3">
+                <li key={r.questionId} className="rounded-md border border-line bg-panel-2 p-3">
                   <span className="font-medium text-ink">#{r.index + 1} · {r.score}</span> - {r.text}
                 </li>
               ))}
@@ -178,7 +178,7 @@ export default function Report() {
           ) : (
             <ul className="mt-2 space-y-2 text-sm text-ink-dim">
               {report.recurringWeaknesses.map((weakness) => (
-                <li key={weakness.label} className="rounded-md border border-line bg-navy-900 p-3">
+                <li key={weakness.label} className="rounded-md border border-line bg-panel-2 p-3">
                   <div className="flex items-center justify-between">
                     <span className="text-ink">{weakness.label}</span>
                     <Badge tone="warn">{weakness.count} answer(s)</Badge>

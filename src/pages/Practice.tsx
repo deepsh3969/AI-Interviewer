@@ -130,7 +130,7 @@ export default function Practice() {
         </div>
         <h2 className="mt-3 text-lg font-medium text-ink">{question.text}</h2>
 
-        <div className="mt-4 rounded-lg border border-line bg-navy-900 p-4">
+        <div className="mt-4 rounded-lg border border-line bg-panel-2 p-4">
           <p className="text-xs uppercase tracking-wide text-ink-faint">Suggested structure</p>
           <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-ink-dim">
             {question.answerStructure.map((step) => (

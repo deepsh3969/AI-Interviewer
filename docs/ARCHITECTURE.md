@@ -6,7 +6,7 @@ AI Interviewer Pro is a local-first React SPA with serverless-style API handlers
 
 ```
 src/
-  components/   shared UI (ui.tsx, AppShell, charts)
+  components/   shared UI (ui.tsx, AppShell, AppSidebar, TopBar, ErrorBoundary, charts)
   hooks/        useInterview (session engine), speech + recorder hooks
   lib/          domain logic: types, validation, session machine,
                 question bank, heuristic eval, report, analytics,
