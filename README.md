@@ -2,6 +2,8 @@
 
 Realistic mock interviews with speech input, structured AI feedback and career-preparation analytics. Local-first: everything you practise stays in your browser unless you configure a server-side AI provider.
 
+**Live:** https://ai-interviewer-pro-drab.vercel.app · **Repo:** https://github.com/deepsh3969/AI-Interviewer
+
 ## What it does
 
 - **Configure an interview** - role, experience level, industry, interview type, difficulty, question count and time budget.
